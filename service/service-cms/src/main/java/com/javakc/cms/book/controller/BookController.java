@@ -15,6 +15,7 @@ import java.util.List;
 @Api(tags = "书籍管理")
 @RestController
 @RequestMapping("/cms/book")
+@CrossOrigin
 public class BookController {
 
     @Autowired

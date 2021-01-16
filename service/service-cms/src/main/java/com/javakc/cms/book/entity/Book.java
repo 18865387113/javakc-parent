@@ -30,10 +30,14 @@ public class Book {
     @Column(name="author")
     @ApiModelProperty(value = "作者")
     private String author ;
+    /** 一级分类 */
+    @Column(name="level1_id")
+    @ApiModelProperty(value = "一级分类")
+    private Integer level1Id ;
     /** 二级分类 */
     @Column(name="level2_id")
     @ApiModelProperty(value = "二级分类")
-    private String level2Id ;
+    private Integer level2Id ;
     /** 版本 */
     @Column(name="copyright_id")
     @ApiModelProperty(value = "版权ID")
