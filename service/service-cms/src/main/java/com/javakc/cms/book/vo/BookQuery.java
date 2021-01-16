@@ -6,5 +6,6 @@ import lombok.Data;
 public class BookQuery {
 
     private String bookName;
-
+    private String beginDate;
+    private String endDate;
 }

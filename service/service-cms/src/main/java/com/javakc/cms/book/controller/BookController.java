@@ -30,7 +30,7 @@ public class BookController {
 
     @ApiOperation("根据条件进行分页查询 - 书籍管理")
     @PostMapping("{pageNo}/{pageSize}")
-    public APICODE pageBook(BookQuery bookQuery, @PathVariable Integer pageNo,@PathVariable Integer pageSize){
+    public APICODE pageBook(@RequestBody(required = false) BookQuery bookQuery, @PathVariable Integer pageNo,@PathVariable Integer pageSize){
         Page<Book> page = bookService.pageBook(bookQuery, pageNo, pageSize);
         long totalElements = page.getTotalElements();
         List<Book> list = page.getContent();
@@ -65,5 +65,7 @@ public class BookController {
         bookService.removeById(id);
         return APICODE.OK();
     }
+
+
 
 }

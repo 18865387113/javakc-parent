@@ -9,6 +9,7 @@ import com.javakc.commonutils.jpa.dynamic.SimpleSpecificationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -36,11 +37,19 @@ public class BookService extends BaseService<BookDao,Book> {
          * null表示 is null
          * !null表示 is not null
          */
-        SimpleSpecificationBuilder<Book> simpleSpecificationBuilder=new SimpleSpecificationBuilder();
-        if(!StringUtils.isEmpty(bookQuery.getBookName())){
-            simpleSpecificationBuilder.and("bookName",":",bookQuery.getBookName());
+        SimpleSpecificationBuilder simpleSpecificationBuilder = new SimpleSpecificationBuilder();
+        if (!StringUtils.isEmpty(bookQuery.getBookName())) {
+            simpleSpecificationBuilder.and("bookName", ":", bookQuery.getBookName());
         }
-        Page page = bookDao.findAll(simpleSpecificationBuilder.getSpecification(), PageRequest.of(pageNo - 1, pageSize));
-        return page;
+        if (!StringUtils.isEmpty(bookQuery.getBeginDate())) {
+            simpleSpecificationBuilder.and("grantStartTime", "ge", bookQuery.getBeginDate());
+        }
+        if (!StringUtils.isEmpty(bookQuery.getEndDate())) {
+            simpleSpecificationBuilder.and("grantStartTime", "lt", bookQuery.getEndDate());
+        }
+        Specification<Book> specification = simpleSpecificationBuilder.getSpecification();
+
+        return dao.findAll(specification, PageRequest.of(pageNo - 1, pageSize));
     }
+
 }
