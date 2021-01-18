@@ -45,7 +45,7 @@ public class Book {
     /** 是否连载 */
     @Column(name="is_serialize")
     @ApiModelProperty(value = "是否连载")
-    private Byte isSerialize ;
+    private Byte isSerialize;
     /** 是否原创 */
     @Column(name="is_original")
     @ApiModelProperty(value = "是否原创")

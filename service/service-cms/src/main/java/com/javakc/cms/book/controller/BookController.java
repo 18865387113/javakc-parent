@@ -37,6 +37,18 @@ public class BookController {
         return APICODE.OK().data("total",totalElements).data("items",list);
     }
 
+    @ApiOperation(value = "设置书籍上下架")
+    @PutMapping("{id}/{isOnline}")
+    public APICODE upOrDownBook(@PathVariable Integer id, @PathVariable Byte isOnline) {
+        // ## 根据id查询书籍数据
+        Book book = bookService.getById(id);
+        book.setId(id);
+        book.setIsOnline(isOnline);
+        // ## 修改数据
+        bookService.saveOrUpdate(book);
+        return APICODE.OK();
+    }
+
     @ApiOperation(value = "新增书籍")
     @PostMapping("saveBook")
     public APICODE saveBook(@RequestBody Book book) {
