@@ -73,7 +73,7 @@ public class Book {
     /** 状态 */
     @Column(name="is_online")
     @ApiModelProperty(value = "是否上线")
-    private Byte isOnline ;
+    private byte isOnline ;
     /** 全本收费 */
     @Column(name="is_charge")
     @ApiModelProperty(value = "是否收费")
