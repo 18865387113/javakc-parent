@@ -114,13 +114,25 @@ public class BookController {
     }
 
     @ApiOperation(value="Excel导入",notes = "使用阿里 EasyExcel 技术实现的导入功能")
-    @PostMapping
+    @PostMapping("importEasyExcel")
     public void importEasyExcel(MultipartFile file){
         try{
             EasyExcel.read(file.getInputStream(),BookData.class,new ExcelListener(bookService)).sheet().doRead();
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @ApiOperation(value= "列表导出", notes = "使用POI导出Excel格式的用户列表数据")
+    @GetMapping("exportExcel")
+    public void exportExcel(HttpServletResponse response) {
+        bookService.exportExcel(response);
+    }
+
+    @ApiOperation(value = "列表导入", notes = "使用POI导入Excel格式的用户列表数据")
+    @PostMapping("importExcel")
+    public void importExcel(MultipartFile file) {
+        bookService.importExcel(file);
     }
 
 }
